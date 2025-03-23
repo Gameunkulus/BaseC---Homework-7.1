@@ -2,33 +2,36 @@
 //
 
 #include <iostream>
-
-#define MODE 1;
-
-int add(int a, int b) {
-    return a + b;
-}
+#include <Windows.h>
 
 int main()
 {
     setlocale(LC_ALL, "Russian");
-#if !defined MODE 
-        std::cout << "Необходимо определить MODE" << std::endl;
+
+#define MODE 1
+
+#ifndef MODE 
+#error Необходимо определить MODE
 #endif
+
 #if MODE == 0 
-        std::cout << "Работаю в режиме тренировки" << std::endl;
+    std::cout << "Работаю в режиме тренировки" << std::endl;
 #elif MODE == 1 
-        int a, b;
-        std::cout << "Работаю в боевом режиме" << std::endl;
-        std::cout << "Введите первое число: ";
-        std::cin >> a;
-        std::cout << "Введите второе число: ";
-        std::cin >> b;
-        std::cout >> "Сумма двух чисел";
-        int add(a,b);
+    int a, b;
+#define add(a, b) (a + b);
+    std::cout << "Работаю в боевом режиме" << std::endl;
+    std::cout << "Введите первое число: ";
+    std::cin >> a;
+    std::cout << "Введите второе число: ";
+    std::cin >> b;
+    std::cout << "Сумма двух чисел: " << add(a, b);
+    std::cout << std::endl;
+
 #else
-        std::cout << "Неизвестный режим. Завершение работы" << std::endl;
+    std::cout << "Неизвестный режим. Завершение работы" << std::endl;
 #endif
+
+
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
