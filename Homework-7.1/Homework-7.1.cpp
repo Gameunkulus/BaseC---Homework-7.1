@@ -4,10 +4,6 @@
 #include <iostream>
 #include <Windows.h>
 
-int main()
-{
-    setlocale(LC_ALL, "Russian");
-
 #define MODE 1
 
 #ifndef MODE 
@@ -15,23 +11,30 @@ int main()
 #endif
 
 #if MODE == 0 
-    std::cout << "Работаю в режиме тренировки" << std::endl;
+    #define mess "Работаю в режиме тренировки" 
 #elif MODE == 1 
-    int a, b;
-#define add(a, b) (a + b);
-    std::cout << "Работаю в боевом режиме" << std::endl;
-    std::cout << "Введите первое число: ";
-    std::cin >> a;
-    std::cout << "Введите второе число: ";
-    std::cin >> b;
-    std::cout << "Сумма двух чисел: " << add(a, b);
-    std::cout << std::endl;
-
+    #define mess "Работаю в боевом режиме" 
+    int add(int a, int b)
+    {
+    return a + b;
+    };
 #else
-    std::cout << "Неизвестный режим. Завершение работы" << std::endl;
+    #define mess "Неизвестный режим. Завершение работы"
 #endif
-
-
+using namespace std;
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    cout << mess << endl;
+#if MODE == 1 
+    int a, b;
+    cout << "Введите первое число: ";
+    cin >> a;
+    cout << "Введите второе число: ";
+    cin >> b;
+    cout << "Сумма двух чисел: " << add(a, b);
+    cout << endl;
+#endif
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
